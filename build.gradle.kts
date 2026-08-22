@@ -39,12 +39,29 @@ subprojects {
 }
 
 allprojects {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") {
+            name = "spigotmc"
+        }
+        maven("https://repo.helpch.at/releases/") {
+            name = "helpchat"
+        }
+        maven("https://maven.enginehub.org/repo/") {
+            name = "enginehub"
+        }
+    }
+
     java {
         withSourcesJar()
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(21))
+        }
     }
 
     kotlin {
-        jvmToolchain(8)
+        jvmToolchain(25)
     }
 }
 

@@ -72,7 +72,7 @@ class ScoreboardsConfig(
             }
 
             isConfigurationSection("scores") -> {
-                val section = getConfigurationSection("scores")
+                val section = getConfigurationSection("scores") ?: return emptyList()
                 mutableListOf<ScoreboardScore<Player>>().also { scores ->
                     section.getKeys(false).forEach forEachScore@{ score ->
                         val scoreSec = section.getConfigurationSection(score) ?: run {
@@ -99,14 +99,15 @@ class ScoreboardsConfig(
     private fun ConfigurationSection.parseScoreboardLines(path: String, defaultVisibleFor: Int, defaultRenderEvery: Int): List<ScoreboardLine<Player>> {
         return when {
             isString(path) -> {
-                val text = getString(path)
+                val text = getString(path).orEmpty()
                 listOf(if (text.isBlank()) BlankLine() else StaticLine(text, defaultRenderEvery))
             }
 
             isList(path) -> {
-                if (getList(path).any { it !is String }) {
+                val lines = getList(path).orEmpty()
+                if (lines.any { it !is String }) {
                     mutableListOf<ScoreboardLine<Player>>().also { lineList ->
-                        getList(path).forEachIndexed { i, line ->
+                        lines.forEachIndexed { i, line ->
                             if (line !is Map<*, *>) {
                                 if (line is String) {
                                     lineList.add(StaticLine(line, defaultRenderEvery))
@@ -163,9 +164,9 @@ class ScoreboardsConfig(
         val textEffects = emptyList<TextEffect>()
         val conditions = parseConditions()
 
-        val textFrames = getList("frames") ?: run {
+            val textFrames = getList("frames") ?: run {
             if (isString("frames")) {
-                return StaticLine(getString("frames"), defaultRenderEvery, textEffects, conditions)
+                return StaticLine(getString("frames").orEmpty(), defaultRenderEvery, textEffects, conditions)
             }
             plugin.logger.warning("Missing 'frames' value for '${this.currentPath}'.")
             return BlankLine(conditions)
@@ -210,7 +211,7 @@ class ScoreboardsConfig(
 
         return when {
             isString("conditions") -> {
-                val name = getString("conditions")
+                val name = getString("conditions") ?: return emptyList()
                 listOf(getCondition(name) ?: run {
                     plugin.logger.warning("Unknown condition '$name' in '${this.currentPath}.conditions'.")
                     return emptyList()

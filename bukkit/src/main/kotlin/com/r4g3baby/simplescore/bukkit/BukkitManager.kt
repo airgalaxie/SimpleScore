@@ -37,7 +37,7 @@ class BukkitManager(private val plugin: BukkitPlugin) : BaseManager<Player, Yaml
     override fun onEnable() {
         super.onEnable()
 
-        plugin.getCommand(plugin.name)?.executor = MainCmd(plugin)
+        plugin.getCommand(plugin.name)?.setExecutor(MainCmd(plugin))
         plugin.server.pluginManager.registerEvents(PlayerListener(this), plugin)
 
         if (plugin.server.pluginManager.getPlugin("LuckPerms") != null) {

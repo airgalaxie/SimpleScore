@@ -1,16 +1,16 @@
 [versions]
 # Plugins
-kotlin = "2.4.10"
+kotlin = "2.3.20"
 dokka = "2.2.0"
 shadow = "9.6.1"
 hangar = "0.1.4"
 minotaur = "2.9.0"
 
 # Libraries
-bukkit = "1.8.8-R0.1-SNAPSHOT"
-netty = "4.1.97.Final"
-papi = "2.11.6"
-luckperms = "5.4"
+bukkit = "26.2-R0.1-SNAPSHOT"
+netty = "4.2.17.Final"
+papi = "2.12.2"
+luckperms = "5.5"
 adventure = "4.25.0"
 worldguardV6 = "6.2"
 worldguardV7 = "7.0.0"
@@ -27,7 +27,7 @@ minotaur = { id = "com.modrinth.minotaur", version.ref = "minotaur" }
 
 [libraries]
 # Bukkit
-bukkit = { module = "org.bukkit:bukkit", version.ref = "bukkit" }
+bukkit = { module = "org.spigotmc:spigot-api", version.ref = "bukkit" }
 netty = { module = "io.netty:netty-transport", version.ref = "netty" }
 papi = { module = "me.clip:placeholderapi", version.ref = "papi" }
 luckperms = { module = "net.luckperms:api", version.ref = "luckperms" }
