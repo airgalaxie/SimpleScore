@@ -33,21 +33,27 @@ class PlayerListener(private val manager: BukkitManager) : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
     fun onPlayerMove(e: PlayerMoveEvent) {
-        if (e.from.blockX == e.to.blockX && e.from.blockY == e.to.blockY && e.from.blockZ == e.to.blockZ) return
+        val from = e.from
+        val to = e.to ?: return
+        if (from.blockX == to.blockX && from.blockY == to.blockY && from.blockZ == to.blockZ) return
 
         manager.getViewer(e.player.uniqueId)?.let { viewer ->
-            manager.updateViewerWorldScoreboard(viewer, e.to.world)
-            manager.updateViewerRegionScoreboard(viewer, e.to)
+            to.world?.let { world -> manager.updateViewerWorldScoreboard(viewer, world) }
+            manager.updateViewerRegionScoreboard(viewer, to)
         }
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onPlayerTeleport(e: PlayerTeleportEvent) {
+        val from = e.from
+        val to = e.to ?: return
+
         manager.getViewer(e.player.uniqueId)?.let { viewer ->
-            if (e.from.world != e.to.world) {
-                manager.updateViewerWorldScoreboard(viewer, e.to.world)
+            val toWorld = to.world
+            if (from.world != toWorld && toWorld != null) {
+                manager.updateViewerWorldScoreboard(viewer, toWorld)
             }
-            manager.updateViewerRegionScoreboard(viewer, e.to)
+            manager.updateViewerRegionScoreboard(viewer, to)
         }
     }
 }
