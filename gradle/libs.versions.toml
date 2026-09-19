@@ -1,22 +1,22 @@
 [versions]
 # Plugins
-kotlin = "2.3.20"
+kotlin = "2.4.10"
 dokka = "2.2.0"
 shadow = "9.6.1"
 hangar = "0.1.4"
 minotaur = "2.9.0"
 
 # Libraries
-bukkit = "26.2-R0.1-SNAPSHOT"
-netty = "4.2.17.Final"
-papi = "2.12.2"
+bukkit = "26.3-R0.1-SNAPSHOT"
+netty = "4.2.18.Final"
+papi = "2.12.3"
 luckperms = "5.5"
-adventure = "4.25.0"
+adventure = "5.2.0"
 worldguardV6 = "6.2"
-worldguardV7 = "7.0.0"
+worldguardV7 = "7.0.19"
 bStats = "3.2.1"
 semver = "2.1.0"
-objenesis = "3.5"
+objenesis = "3.6"
 
 [plugins]
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
