@@ -15,10 +15,20 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Setup Java 21
+      - name: Read Java version from catalog
+        id: java-version
+        run: |
+          python3 - <<'PYTHON' >> "$GITHUB_OUTPUT"
+          import tomllib
+          from pathlib import Path
+          catalog = tomllib.loads(Path("gradle/libs.versions.toml").read_text())
+          print(f"version={catalog['versions']['java']}")
+          PYTHON
+
+      - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          java-version: 21
+          java-version: ${{ steps.java-version.outputs.version }}
           distribution: temurin
 
       - name: Setup Gradle
@@ -35,26 +45,3 @@ jobs:
           generate_release_notes: true
           files: build/libs/*.jar
         continue-on-error: false
-
-      - name: Get GitHub Changelog
-        run: |
-          changelog=$(gh api repos/${{ github.repository }}/releases/tags/${{ github.ref_name }} --jq '.body')
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "GITHUB_CHANGELOG<<$EOF" >> "$GITHUB_ENV"
-          echo "$changelog" >> "$GITHUB_ENV"
-          echo "$EOF" >> "$GITHUB_ENV"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        continue-on-error: true
-
-      - name: Publish Hangar Release
-        run: ./gradlew publishAllPublicationsToHangar
-        env:
-          HANGAR_TOKEN: ${{ secrets.HANGAR_TOKEN }}
-        continue-on-error: true
-
-      - name: Publish Modrinth Release
-        run: ./gradlew modrinth
-        env:
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-        continue-on-error: true

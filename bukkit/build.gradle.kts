@@ -16,7 +16,6 @@ dependencies {
     compileOnly(libs.adventureSerializer)
 
     implementation(libs.objenesis)
-    implementation(libs.bStatsBukkit)
 }
 
 tasks {

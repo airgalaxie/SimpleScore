@@ -21,10 +21,20 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Setup Java 21
+      - name: Read Java version from catalog
+        id: java-version
+        run: |
+          python3 - <<'PYTHON' >> "$GITHUB_OUTPUT"
+          import tomllib
+          from pathlib import Path
+          catalog = tomllib.loads(Path("gradle/libs.versions.toml").read_text())
+          print(f"version={catalog['versions']['java']}")
+          PYTHON
+
+      - name: Setup Java
         uses: actions/setup-java@v5
         with:
-          java-version: 21
+          java-version: ${{ steps.java-version.outputs.version }}
           distribution: temurin
 
       - name: Setup Gradle

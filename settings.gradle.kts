@@ -1,4 +1,12 @@
 pluginManagement {
+    // Settings plugins are resolved before Gradle creates version catalog accessors.
+    val catalog = file("gradle/libs.versions.toml").readText()
+    val foojayVersion = Regex("""(?m)^foojay\s*=\s*"([^"]+)"""").find(catalog)
+        ?.groupValues?.get(1) ?: error("Missing foojay version in version catalog")
+    plugins {
+        id("org.gradle.toolchains.foojay-resolver-convention") version foojayVersion
+    }
+
     repositories {
         mavenCentral()
         gradlePluginPortal()
@@ -23,7 +31,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version ("1.0.0")
+    id("org.gradle.toolchains.foojay-resolver-convention")
 }
 
 rootProject.name = "SimpleScore"

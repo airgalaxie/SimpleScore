@@ -22,12 +22,10 @@ val generateProjectInfo: TaskProvider<Task> = tasks.register("generateProjectInf
                 import net.swiftzer.semver.SemVer
 
                 object ProjectInfo {
-                    const val BSTATS_BUKKIT_ID: Int = ${rootProject.property("bStats.bukkit")}
-
                     const val NAME: String = "${rootProject.name}"
                     val VERSION: SemVer = SemVer.parse("${rootProject.version}")
 
-                    const val DOWNLOAD_URL: String = "https://modrinth.com/plugin/simplescore"
+                    const val DOWNLOAD_URL: String = "https://github.com/${rootProject.property("github.user")}/${rootProject.property("github.repo")}/releases/latest"
                     const val GITHUB_USER: String = "${rootProject.property("github.user")}"
                     const val GITHUB_REPO: String = "${rootProject.property("github.repo")}"
                 }

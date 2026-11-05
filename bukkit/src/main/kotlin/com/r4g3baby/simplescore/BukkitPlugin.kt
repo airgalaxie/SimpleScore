@@ -10,7 +10,6 @@ import com.r4g3baby.simplescore.bukkit.scheduler.Scheduler
 import com.r4g3baby.simplescore.bukkit.util.bukkitProvider
 import com.r4g3baby.simplescore.bukkit.worldguard.WorldGuardAPI
 import com.r4g3baby.simplescore.core.util.checkForUpdates
-import org.bstats.bukkit.Metrics
 import org.bukkit.entity.Player
 import org.bukkit.plugin.ServicePriority
 import org.bukkit.plugin.java.JavaPlugin
@@ -42,8 +41,6 @@ class BukkitPlugin : JavaPlugin(), Platform<Player> {
             return
         }
         manager.onEnable()
-
-        Metrics(this, ProjectInfo.BSTATS_BUKKIT_ID)
 
         if (manager.config.checkForUpdates) {
             scheduler.runTaskAsync {
