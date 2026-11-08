@@ -58,9 +58,17 @@ representative at an online or offline event.
 
 ## Enforcement
 
+This Code of Conduct is administered by the maintainers of this independent
+fork. In this repository, "community leaders" refers to the fork maintainers.
+The original project's maintainers are not responsible for handling reports
+concerning this fork.
+
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
 reported to the community leaders responsible for enforcement at
-me@ruipereira.dev.
+[git@airgalaxie.de](mailto:git@airgalaxie.de).
+Please use this email address for confidential reports rather than public issues,
+and do not post personal information or confidential evidence publicly.
+
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the
