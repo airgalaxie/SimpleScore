@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "simplescore",
+  "version": "${version}",
+  "name": "SimpleScore",
+  "description": "Animated per-player scoreboards for Fabric servers.",
+  "environment": "server",
+  "entrypoints": { "main": ["com.r4g3baby.simplescore.fabric.FabricEntrypoint"] },
+  "mixins": ["simplescore.mixins.json"],
+  "authors": ["R4G3_BABY"],
+  "license": "MIT",
+  "depends": {
+    "java": ">=${java}",
+    "minecraft": "${minecraft}",
+    "fabricloader": ">=${loader}",
+    "fabric-api": ">=${fabricApi}"
+  },
+  "suggests": { "placeholder-api": ">=${patbox}", "luckperms": "*" }
+}

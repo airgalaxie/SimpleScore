@@ -1,2 +1,6 @@
-jdk:
-  - openjdk21
+before_install:
+  - |
+    java_version=$(sed -n 's/^java[[:space:]]*=[[:space:]]*"\([0-9][0-9]*\)"[[:space:]]*$/\1/p' gradle/libs.versions.toml)
+    test -n "$java_version" || exit 1
+    sdk install java "${java_version}-open"
+    sdk use java "${java_version}-open" || exit 1

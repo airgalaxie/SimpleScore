@@ -9,6 +9,7 @@ dependencies {
 }
 
 val generateProjectInfo: TaskProvider<Task> = tasks.register("generateProjectInfo") {
+    inputs.property("projectVersion", project.version.toString())
     val outputDir = layout.buildDirectory.dir("generated/source/projectInfo/${rootProject.group}")
     outputs.dir(outputDir)
 

@@ -1,6 +1,7 @@
 [versions]
 # Project and toolchains
-project = "4.3.2-dev"
+project = "4.3.2-build.1"
+# Authoritative Java version for Gradle toolchains, GitHub Actions, and JitPack.
 java = "25"
 gradle = "9.8.2"
 
@@ -9,6 +10,17 @@ foojay = "1.0.0"
 kotlin = "2.4.21"
 dokka = "2.2.0"
 shadow = "9.6.1"
+loom = "1.19.4"
+
+# Fabric (independent from the Bukkit server API version)
+minecraft = "26.4-snapshot-7"
+# Fabric Loader normalizes the launcher snapshot ID for dependency matching.
+minecraftRuntime = "26.4-alpha.7"
+fabricLoader = "0.20.1"
+fabricInstaller = "1.1.2"
+fabricApi = "0.165.4+26.4"
+patbox = "3.2.0+26.3"
+snakeYaml = "2.6"
 
 # Libraries
 bukkit = "26.3-R0.1-SNAPSHOT"
@@ -17,11 +29,12 @@ papi = "2.12.3"
 luckperms = "5.5"
 adventure = "5.2.0"
 worldguardV6 = "6.2"
-worldguardV7 = "7.0.19"
+worldguardV7 = "7.0.21"
 semver = "2.1.0"
 objenesis = "3.6"
 
 [plugins]
+loom = { id = "net.fabricmc.fabric-loom", version.ref = "loom" }
 kotlin = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
@@ -44,3 +57,13 @@ worldguardV7 = { module = "com.sk89q.worldguard:worldguard-bukkit", version.ref 
 # Utilities
 semver = { module = "net.swiftzer.semver:semver", version.ref = "semver" }
 objenesis = { module = "org.objenesis:objenesis", version.ref = "objenesis" }
+
+# Tests
+kotlinTest = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+
+# Fabric
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+fabricLoader = { module = "net.fabricmc:fabric-loader", version.ref = "fabricLoader" }
+fabricApi = { module = "net.fabricmc.fabric-api:fabric-api", version.ref = "fabricApi" }
+patbox = { module = "eu.pb4:placeholder-api", version.ref = "patbox" }
+snakeYaml = { module = "org.yaml:snakeyaml", version.ref = "snakeYaml" }

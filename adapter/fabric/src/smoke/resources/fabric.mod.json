@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "simplescore-smoke",
+  "version": "${version}",
+  "environment": "server",
+  "entrypoints": { "main": ["com.r4g3baby.simplescore.fabric.smoke.ProductionSmoke"] },
+  "depends": { "simplescore": "*" }
+}

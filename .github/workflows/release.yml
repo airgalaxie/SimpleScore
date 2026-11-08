@@ -35,7 +35,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew shadowJar
+        run: ./gradlew adapterJars
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v3
@@ -43,5 +43,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           generate_release_notes: true
-          files: build/libs/*.jar
+          files: target/*.jar
         continue-on-error: false

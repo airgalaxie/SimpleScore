@@ -9,11 +9,10 @@ group = "com.r4g3baby.simplescore"
 version = libs.versions.project.get()
 
 dependencies {
-    api(project("bukkit"))
-
     dokka(project(":api"))
     dokka(project(":core"))
-    dokka(project(":bukkit"))
+    dokka(project(":adapter:bukkit"))
+    dokka(project(":adapter:fabric"))
 }
 
 subprojects {
@@ -37,6 +36,8 @@ subprojects {
 allprojects {
     repositories {
         mavenLocal()
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.nucleoid.xyz/")
         mavenCentral()
         maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") {
             name = "spigotmc"
@@ -69,22 +70,16 @@ tasks {
     jar { enabled = false }
 
     shadowJar {
-        archiveFileName.set("${project.name}-${project.version}.jar")
-
-        manifest {
-            attributes["paperweight-mappings-namespace"] = "mojang"
-        }
-
-        val libs = "${project.group}.lib"
-        relocate("org.objenesis", "$libs.objenesis")
-        relocate("net.swiftzer.semver", "$libs.semver")
-
-        relocate("org.jetbrains", "$libs.jetbrains")
-        relocate("kotlin", "$libs.kotlin")
-
-        from(file("LICENSE"))
-        exclude("META-INF/**")
-
-        minimize()
+        enabled = false
+        dependsOn(":adapter:bukkit:shadowJar", ":adapter:fabric:shadowJar")
     }
+
+    register("adapterJars") {
+        group = "build"
+        description = "Build both standalone platform adapters into target/."
+        dependsOn(":adapter:bukkit:shadowJar", ":adapter:fabric:shadowJar")
+    }
+
+    assemble { dependsOn("adapterJars") }
+    clean { delete(layout.projectDirectory.dir("target")) }
 }

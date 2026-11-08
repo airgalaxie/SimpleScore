@@ -8,6 +8,7 @@ pluginManagement {
     }
 
     repositories {
+        maven("https://maven.fabricmc.net/")
         mavenCentral()
         gradlePluginPortal()
     }
@@ -38,8 +39,10 @@ rootProject.name = "SimpleScore"
 
 include("api")
 include("core")
-include("bukkit")
-include("bukkit:worldguard")
-include("bukkit:worldguard:common")
-include("bukkit:worldguard:v6")
-include("bukkit:worldguard:v7")
+include("adapter:bukkit")
+include("adapter:bukkit:worldguard")
+include("adapter:bukkit:worldguard:common")
+include("adapter:bukkit:worldguard:v6")
+include("adapter:bukkit:worldguard:v7")
+
+include("adapter:fabric")

@@ -1,0 +1,40 @@
+# Built-in Fabric compass. Use %compass_bar% in a scoreboard line.
+# /sb reload applies changes. Disabled means no frames are built or retained.
+enabled: true
+
+# Content: angles are compass bearings (0=N, 90=E, 180=S, 270=W).
+content:
+  directions:
+    N: '[N]'
+    NE: 'NE'
+    E: '[E]'
+    SE: 'SE'
+    S: '[S]'
+    SW: 'SW'
+    W: '[W]'
+    NW: 'NW'
+  scale: '|'
+# Layout uses vanilla default-font pixel advances, NOT character counts.
+layout:
+  width-pixels: 160
+  pixels-per-45-degrees: 64
+  scale-every-degrees: 5
+  label-margin-pixels: 6
+# Styles: &0..&f or #RRGGBB; bold, italic, underline, strikethrough.
+styles:
+  direction:
+    color: '&7'
+    bold: false
+  active:
+    color: '#FFD54F'
+    bold: true
+  scale:
+    color: '&8'
+behavior:
+  resolution-degrees: 0.5
+  highlight: true
+  active-within-degrees: 15
+# Optional measured advances INCLUDING the trailing pixel, for custom glyphs.
+# ASCII is built in. Unsupported characters fail validation rather than guessing.
+font:
+  advances: {}

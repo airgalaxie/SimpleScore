@@ -37,6 +37,7 @@ replay_pid*
 .kotlin/
 
 ### Gradle ###
+/target/
 .gradle
 **/build/
 !**/src/**/build/
